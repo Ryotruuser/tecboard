@@ -15,7 +15,7 @@ export function FormularioDeEvento({temas, aoSubmeter}){
       tema: temas.find(function(item){
         return item.id == formData.get('tema')
       }),
-      data: new Date(formData.get('dataEvento ')) ,
+      data: new Date(formData.get('dataEvento')) ,
       titulo: formData.get('nomeEvento') 
     }
 

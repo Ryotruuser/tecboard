@@ -42,12 +42,6 @@ function App() {
       data: new Date(),
       titulo: 'Mulheres no Front'
     }, 
-    {
-      capa: "https://raw.githubusercontent.com/viniciosneves/tecboard-assets/refs/heads/main/imagem_1.png",
-      tema: temas[0],
-      data: new Date(),
-      titulo: 'Mulheres no Front'
-    }, 
   ])
 
   function adicionarEvento(evento){
@@ -63,14 +57,22 @@ function App() {
       <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento} />
       <section className="container">
 
-      {temas.map(function (item){
+      {temas.map(function (tema){
+        if(!eventos.some(function(evento){
+          return evento.tema.id == tema.id
+        })){
+          return null
+        }
         return (
-          <section key={item.id}>
-            <Tema tema={item}/>
+          <section key={tema.id}>
+            <Tema tema={tema}/>
             <div className="eventos">
-
-            {eventos.map(function (item, index){
-              return <CardEvento evento={item} key={index}/>
+            {eventos.filter(function(evento){
+              return evento.tema.id == tema.id
+            })
+            
+            .map(function (evento, index){
+              return <CardEvento evento={evento} key={index}/>
             })}
             </div>
             
